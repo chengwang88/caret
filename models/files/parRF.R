@@ -13,14 +13,14 @@ modelInfo <- list(label = "Parallel Random Forest",
                   fit = function(x, y, wts, param, lev, last, classProbs, ...) {
                     workers <- getDoParWorkers()
                     theDots <- list(...)
-                    theDots$ntree <- if(is.null(theDots$ntree)) 250 else theDots$ntree
+                    theDots$ntree <- if(is.null(theDots$ntree)) 500 else theDots$ntree
                     
                     theDots$x <- x
                     theDots$y <- y
                     theDots$mtry <- param$mtry
                     theDots$ntree <- ceiling(theDots$ntree/workers)                       
                     
-                    out <- foreach(ntree = 1:workers, .combine = combine) %dopar% {
+                    out <- foreach(ntree = 1:workers, .combine = combine) %dorng% {
                       library(randomForest)
                       do.call("randomForest", theDots)
                     }
