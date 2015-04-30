@@ -1,5 +1,5 @@
 modelInfo <- list(label = "Parallel Random Forest",
-                  library = "randomForest",
+                  library = c("randomForest","doRNG"),
                   loop = NULL,
                   type = c("Classification", "Regression"),
                   parameters = data.frame(parameter = "mtry",
