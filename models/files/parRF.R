@@ -12,6 +12,7 @@ modelInfo <- list(label = "Parallel Random Forest",
                   },
                   fit = function(x, y, wts, param, lev, last, classProbs, ...) {
                     workers <- getDoParWorkers()
+		    print(workers)
                     theDots <- list(...)
                     theDots$ntree <- if(is.null(theDots$ntree)) 500 else theDots$ntree
                     
