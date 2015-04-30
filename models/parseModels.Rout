@@ -1,0 +1,39 @@
+
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin10.8.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> setwd("~/sw/caret/models/files")
+> modelFiles <- list.files(pattern = "\\.R$")
+> 
+> models <- vector(mode = "list", length = length(modelFiles))
+> names(models) <- gsub("\\.R$", "", modelFiles)
+> 
+> for(i in seq(along = modelFiles)) {
++   source(modelFiles[i])
++   models[[i]] <- modelInfo
++   rm(modelInfo)
++ }
+> 
+> save(models, file = "../../pkg/caret/inst/models/models.RData")
+> 
+> # cat("\nYou can update your caret installation using the command:\n\n")
+> # cat(sprintf("  cp models.RData %s/.\n", system.file("models", package="caret")))
+> 
+> proc.time()
+   user  system elapsed 
+  0.508   0.032   0.657 
